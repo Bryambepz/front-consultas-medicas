@@ -6,8 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ColaboradoresComponent } from './pages/colaboradores/colaboradores.component';
-import { DoctoresComponent } from './pages/doctores/doctores.component';
+import { EditarComponent } from './pages/editarInfo/editar.component';
+// import { DoctoresComponent } from './pages/doctores/doctores.component';
 import { LoginRegistrarComponent } from './pages/login-registrar/login-registrar.component';
 import { MenuPagsComponent } from './pages/menu/menu-pags/menu-pags.component';
 import { RecuperarPasswordComponent } from './pages/recuperar-password/recuperar-password.component';
@@ -15,8 +15,7 @@ import { RecuperarPasswordComponent } from './pages/recuperar-password/recuperar
 @NgModule({
   declarations: [
     AppComponent,
-    ColaboradoresComponent,
-    DoctoresComponent,
+    EditarComponent,
     LoginRegistrarComponent,
     MenuPagsComponent,
     RecuperarPasswordComponent

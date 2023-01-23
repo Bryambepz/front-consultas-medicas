@@ -75,26 +75,33 @@ export class LoginRegistrarComponent implements OnInit {
               localStorage.setItem('rol', d.rol);
               this.isColaborador = true;
               this.colaborador = d;
-              this.route.navigate(['colaboradores']);
+              this.route.navigate(['editar']);              
             }
           });
+          
+          let loginMedico = false;
+          if(this.isColaborador == false){
+            this.servMedico.getMedicos().subscribe((d) => {                                    
+              d.body!.forEach((d) => {
+                if(this.colaborador.email == d.email &&
+                  this.colaborador.contrasenia == d.contrasenia){
+                    localStorage.setItem('id', d.id);
+                    localStorage.setItem('rol', d.rol);             
+                    loginMedico = true;       
+                    this.colaborador = d;          
+                    this.route.navigate(['editar']);
+                  }
+              });
+              if(!this.isColaborador && !loginMedico){
+                window.alert("Ingrese un correo y contraseña validos")
+              }
+            })              
+            
+          }
         });
 
-        this.servMedico.getMedicos().subscribe((d) => {                                    
-          d.body!.forEach((d) => {
-            if(this.colaborador.email == d.email &&
-              this.colaborador.contrasenia == d.contrasenia){
-                localStorage.setItem('id', d.id);
-                localStorage.setItem('rol', d.rol);
-                this.isColaborador = false;
-                this.colaborador = d;
-                console.log("== ",d);
-                
-                this.route.navigate(['colaboradores']);
-              }
-          })
-        })              
       
+        
     }
   }
 }

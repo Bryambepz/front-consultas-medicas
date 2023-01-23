@@ -4,11 +4,11 @@ import { ServMedicoService } from 'src/app/services/Medicos-Service/serv-medico.
 import { ServColaboradorService } from 'src/app/services/serv-colaborador.service';
 
 @Component({
-  selector: 'app-colaboradores',
-  templateUrl: './colaboradores.component.html',
-  styleUrls: ['./colaboradores.component.scss'],
+  selector: 'app-editar',
+  templateUrl: './editar.component.html',
+  styleUrls: ['./editar.component.scss'],
 })
-export class ColaboradoresComponent implements OnInit {
+export class EditarComponent implements OnInit {
   constructor(
     private servColaborador: ServColaboradorService,
     private servMedico: ServMedicoService
@@ -28,8 +28,7 @@ export class ColaboradoresComponent implements OnInit {
         .subscribe((d) => {
           this.colaborador = d.body?.at(0)!;
           this.isColaborador =
-            this.colaborador.rol == 'Colaborador' ? true : false;
-          console.log(' == ', this.colaborador);
+            this.colaborador.rol == 'Colaborador' ? true : false;          
         });
     } else {
       this.isColaborador = false;
@@ -38,8 +37,7 @@ export class ColaboradoresComponent implements OnInit {
         .subscribe((d) => {
           this.colaborador = d.body?.at(0)!;
           this.isColaborador =
-            this.colaborador.rol == 'Colaborador' ? true : false;
-          console.log(' == ', this.colaborador);
+            this.colaborador.rol == 'Colaborador' ? true : false;          
         });
     }
   }
@@ -65,8 +63,7 @@ export class ColaboradoresComponent implements OnInit {
     if (this.isColaborador) {
       this.servColaborador
         .eliminar(localStorage.getItem('id')!.toString())
-        .subscribe((d) => {
-          console.log(d);
+        .subscribe((d) => {          
           if (d.status == 200 && d.statusText == 'OK') {
             localStorage.setItem('id', '');
             localStorage.setItem('rol', '');
@@ -76,8 +73,7 @@ export class ColaboradoresComponent implements OnInit {
     } else {
       this.servMedico
         .eliminar(localStorage.getItem('id')!.toString())
-        .subscribe((d) => {
-          console.log(d);
+        .subscribe((d) => {          
           if (d.status == 200 && d.statusText == 'OK') {
             localStorage.setItem('id', '');
             localStorage.setItem('rol', '');
