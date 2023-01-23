@@ -9,6 +9,8 @@
 			<input name="telefono" [(ngModel)]="colaborador.telefono" required="required" type="text" placeholder="Telefono" />
 			<input name="celular" [(ngModel)]="colaborador.celular" required="required" type="text" placeholder="Celular" />
 			<input name="direccion" [(ngModel)]="colaborador.direccion" required="required" type="text" placeholder="Direccion" />
+			<input *ngIf="isColaborador == false" name="usuario" [(ngModel)]="colaborador.usuario" required="required" type="text" placeholder="Usuario" />
+			<input *ngIf="isColaborador == false" name="especialidad" [(ngModel)]="colaborador.especialidad" required="required" type="text" placeholder="Especialidad" />
 			<input name="email" [(ngModel)]="colaborador.email" required="required" type="email" placeholder="Email" />
 			<input name="contrasenia" [(ngModel)]="colaborador.contrasenia" required="required" type="password" placeholder="Contraseña" />
             <div>

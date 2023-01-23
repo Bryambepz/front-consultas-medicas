@@ -9,4 +9,7 @@ export class Colaboradores{
     email:string='';
     contrasenia:string='';
     rol:string='';
+    especialidad:string='';
+    usuario:string='';
+    fechaNacimiento: Date = new Date();
 }
