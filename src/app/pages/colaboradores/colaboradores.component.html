@@ -1,0 +1,20 @@
+<div class="main">
+    <app-menu-pags></app-menu-pags>
+    <div class="form_actualizar">
+        <form>
+            <h2>Actualizar Información</h2>
+            <input name="cedula" [(ngModel)]="colaborador.cedula" type="text" required="required" placeholder="Cedula"/>
+			<input name="nombres" [(ngModel)]="colaborador.nombres" required="required" type="text" placeholder="Nombres" />
+			<input name="apellidos" [(ngModel)]="colaborador.apellidos" required="required" type="text" placeholder="Apellidos" />
+			<input name="telefono" [(ngModel)]="colaborador.telefono" required="required" type="text" placeholder="Telefono" />
+			<input name="celular" [(ngModel)]="colaborador.celular" required="required" type="text" placeholder="Celular" />
+			<input name="direccion" [(ngModel)]="colaborador.direccion" required="required" type="text" placeholder="Direccion" />
+			<input name="email" [(ngModel)]="colaborador.email" required="required" type="email" placeholder="Email" />
+			<input name="contrasenia" [(ngModel)]="colaborador.contrasenia" required="required" type="password" placeholder="Contraseña" />
+            <div>
+                <button id="actualziarBtn" (click)="actualizar()">Actualizar</button>
+                <button id="eliminarBtn" (click)="eliminar()">Eliminar Cuenta</button>
+            </div>
+        </form>
+    </div>    
+</div>
