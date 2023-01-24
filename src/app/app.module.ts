@@ -11,6 +11,8 @@ import { EditarComponent } from './pages/editarInfo/editar.component';
 import { LoginRegistrarComponent } from './pages/login-registrar/login-registrar.component';
 import { MenuPagsComponent } from './pages/menu/menu-pags/menu-pags.component';
 import { RecuperarPasswordComponent } from './pages/recuperar-password/recuperar-password.component';
+import { PacientesComponent } from './pages/pacientes/pacientes.component';
+import { PacientesInfoComponent } from './pages/pacientes-info/pacientes-info.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { RecuperarPasswordComponent } from './pages/recuperar-password/recuperar
     EditarComponent,
     LoginRegistrarComponent,
     MenuPagsComponent,
-    RecuperarPasswordComponent
+    RecuperarPasswordComponent,
+    PacientesComponent,
+    PacientesInfoComponent
   ],
   imports: [
     BrowserModule,

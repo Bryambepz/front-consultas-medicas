@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+h1 {
+	font-weight: bold;
+	margin: 0 0 3rem 0;
+}
+
+h2 {
+	text-align: center;
+}
+
+p {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px 0 30px;
+}
+
+.div-table{
+    display: block;    
+    text-align: center;
+    height: 80%;
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 25%;
+}
+
+
+table {
+  overflow: scroll;
+  width: 85%;
+  border-radius: .7rem;
+  border-collapse: inherit;  
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+.acciones{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-evenly;
+}
+.acciones svg{
+    cursor: pointer;
+}
+.acciones svg:hover{
+    color: white;
+}
+th,
+td {
+//   font-family: inherit;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+}
+th {
+  text-align: left;
+}
+thead th {
+  background-color: #008fbb;
+  text-align: center;
+}
+tbody tr:hover {
+  background-color: rgba(55, 126, 188, 0.44);
+}
+table tbody tr:nth-child(even){
+  background-color: #abdceb;
+}
+table tbody tr:nth-child(even):hover{
+  background-color: #055269;
+}
+table tbody tr:hover{
+  background-color: #055269;
+}

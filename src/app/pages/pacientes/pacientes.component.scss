@@ -1,12 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
-// .main{
-//     margin-left: .2rem;
-// }
-// .main:hover{
-//     margin-left: 250px;
-// }
-
 h1 {
 	font-weight: bold;
 	margin: 0 0 3rem 0;
@@ -35,10 +28,15 @@ a {
 	margin: 15px 0;
 }
 
-#eliminarBtn{
-    border: 1px solid #bf2a0c;
-	background-color: #bf2a0c;
-    margin-left: 1rem;
+.div-label{    
+    width: 38%;
+    text-align: left;
+    padding: .5rem 0;
+}
+label{
+    text-transform: uppercase;
+    color: #535457;
+    font-size: .8rem;
 }
 
 #actualziarBtn{
@@ -87,5 +85,5 @@ input {
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 0;
-	width: 65%;
+	width: 35%;
 }

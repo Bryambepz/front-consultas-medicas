@@ -9,13 +9,14 @@
 			<input name="telefono" [(ngModel)]="colaborador.telefono" required="required" type="text" placeholder="Telefono" />
 			<input name="celular" [(ngModel)]="colaborador.celular" required="required" type="text" placeholder="Celular" />
 			<input name="direccion" [(ngModel)]="colaborador.direccion" required="required" type="text" placeholder="Direccion" />
-			<input *ngIf="isColaborador == false" name="usuario" [(ngModel)]="colaborador.usuario" required="required" type="text" placeholder="Usuario" />
-			<input *ngIf="isColaborador == false" name="especialidad" [(ngModel)]="colaborador.especialidad" required="required" type="text" placeholder="Especialidad" />
+			<input *ngIf="isColaborador == false && isPaciente == false" name="usuario" [(ngModel)]="colaborador.usuario" required="required" type="text" placeholder="Usuario" />
+			<input *ngIf="isColaborador == false && isPaciente == false" name="especialidad" [(ngModel)]="colaborador.especialidad" required="required" type="text" placeholder="Especialidad" />
 			<input name="email" [(ngModel)]="colaborador.email" required="required" type="email" placeholder="Email" />
-			<input name="contrasenia" [(ngModel)]="colaborador.contrasenia" required="required" type="password" placeholder="Contraseña" />
+			<input *ngIf="isPaciente == false" name="contrasenia" [(ngModel)]="colaborador.contrasenia" required="required" type="password" placeholder="Contraseña" />
+			<input *ngIf="isPaciente == true" name="fecha" [(ngModel)]="colaborador.fechaNacimiento" required="required" type="date" placeholder="dd-mm-yyyy" />
             <div>
                 <button id="actualziarBtn" (click)="actualizar()">Actualizar</button>
-                <button id="eliminarBtn" (click)="eliminar()">Eliminar Cuenta</button>
+                <button *ngIf="isPaciente == false" id="eliminarBtn" (click)="eliminar()">Eliminar Cuenta</button>
             </div>
         </form>
     </div>    
