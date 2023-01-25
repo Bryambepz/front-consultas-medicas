@@ -1,0 +1,159 @@
+<app-menu-pags></app-menu-pags>
+<div class="main">
+    <div *ngIf="agendarCita == true || actualizar == true" id="agendar">
+
+        <!-- tabla medicos -->
+        <h2>Médicos</h2>
+        <table>
+            <thead>
+                <th></th>
+                <th>Cedula</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Especialidad</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let medicos of lista_medicos">
+                    <td>
+                        <svg (click)="newcita.medico=medicos.cedula; medicoS=true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check2-square" viewBox="0 0 16 16">
+                            <path
+                                d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                            <path
+                                d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                        </svg>
+                    </td>
+                    <td style="width: fit-content;">{{medicos.cedula}}</td>
+                    <td style="width: fit-content;">{{medicos.nombres}}</td>
+                    <td style="width: fit-content;">{{medicos.apellidos}}</td>
+                    <td style="width: fit-content;">{{medicos.especialidad}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- tabla pacientes cita -->
+        <h2>Pacientes</h2>
+        <table>
+            <thead>
+                <th></th>
+                <th>Cedula</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let colaborador of lista_pacientes">
+                    <th>
+                        <svg (click)="newcita.paciente=colaborador.cedula; pacienteS=true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check2-square" viewBox="0 0 16 16">
+                            <path
+                                d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                            <path
+                                d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                        </svg>
+                    </th>
+                    <td>{{colaborador.cedula}}</td>
+                    <td>{{colaborador.nombres}}</td>
+                    <td>{{colaborador.apellidos}}</td>
+                    <td>{{colaborador.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h1 style="margin-top: 2rem;">Agendar Cita</h1>
+        <div class="div-label">
+            <label for="medico">Médico designado</label>
+        </div>
+        <input name="medico" [(ngModel)]="newcita.medico" type="text" placeholder="Médico designado" readonly>
+
+        <div class="div-label">
+            <label for="paciente">Paciente</label>
+        </div>
+        <input name="paciente" [(ngModel)]="newcita.paciente" type="text" placeholder="Paciente" readonly>
+
+        <form *ngIf="medicoS == true && pacienteS == true || actualizar == true">
+            <div class="div-label">
+                <label for="fechaEntrada">Fecha y hora de entrada</label>
+            </div>
+            <input *ngIf="actualizar == false" name="fechaEntrada" [(ngModel)]="newcita.fechaHoraEntrada" type="datetime-local" placeholder="dd-mm-yyyy">
+            <input *ngIf="actualizar == true" name="fechaEntrada" [(ngModel)]="fechaEntradaAct" type="datetime-local" placeholder="dd-mm-yyyy">
+
+            <div class="div-label">
+                <label for="fechaSalida">Fecha y hora de salida</label>
+            </div>
+            <input  *ngIf="actualizar == false" name="fechaSalida" [(ngModel)]="newcita.fechaHoraSalida" type="datetime-local" placeholder="dd-mm-yyyy">
+            <input  *ngIf="actualizar == true" name="fechaSalida" [(ngModel)]="fechaSalidaAct" type="datetime-local" placeholder="dd-mm-yyyy">
+
+            <div class="div-label">
+                <label for="observacion">Observacion</label>
+            </div>
+            <textarea name="observacion" [(ngModel)]="newcita.observacion" cols="80" rows="5"></textarea>
+
+            <div *ngIf="actualizar" class="div-label">
+                <label for="estado">Estado de la cita</label>
+            </div>
+            <select *ngIf="actualizar" [(ngModel)]="newcita.estado" name="estado">
+                <option value="" disabled>Estado de la cita</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Registrada">Registrada</option>
+                <option value="Reagendada">Reagendada</option>
+                <option value="Iniciada">Iniciada</option>
+                <option value="Finalizada">Finalizada</option>
+                <option value="Cancelada">Cancelada</option>
+            </select>
+
+            <div *ngIf="actualizar == false">
+                <button id="actualziarBtn" (click)="cita()">Crear Cita</button>
+            </div>
+            <div *ngIf="actualizar == true">
+                <button id="actualziarBtn" (click)="editar(newcita.id)">Actualizar Cita</button>
+            </div>
+        </form>
+
+    </div>
+
+    <div *ngIf="agendarCita == false && actualizar == false">
+        <h1>Listado de Citas</h1>
+
+        <h4>Buscar citas del paciente:
+            <input (keyup)="citasCedula()" type="text" placeholder="Cedula Paciente" [(ngModel)] = 'cedula' maxlength="10">
+        </h4>
+        
+        <table>
+            <thead>
+                <th></th>
+                <th>Cédula</th>
+                <th>Paciente</th>
+                <th>Observación</th>
+                <th>Médico</th>
+                <th>Especialidad</th>
+                <th>Fecha Entrada</th>
+                <th>Fecha Salida</th>
+                <th>Estado</th>
+            </thead>
+            <tbody>                
+                <tr *ngFor="let cita of lista_citas; let i = index">
+                    <td class="acciones">
+                        <svg (click)="eliminiar(cita.id)" width="16" height="16" fill="currentColor"
+                            class="bi-trash-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg>
+                        <svg (click)="editar(cita.id)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="fa bi-pen-fill" viewBox="0 0 16 16">
+                            <path
+                                d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+                        </svg>
+                    </td>
+                    <td style="width: fit-content;">{{cita.paciente.cedula}}</td>
+                    <td style="width: fit-content;">{{cita.paciente.nombres}} {{cita.paciente.apellidos}}</td>
+                    <td style="width: fit-content;">{{cita.observacion}}</td>
+                    <td style="width: fit-content;">{{cita.medico.nombres}}</td>
+                    <td style="width: fit-content;">{{cita.medico.especialidad.descripcion}}</td>
+                    <td style="width: fit-content;">{{fechaE[i]}}</td>
+                    <td style="width: fit-content;">{{fechaS[i]}}</td>
+                    <td style="width: fit-content;">{{cita.estado}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

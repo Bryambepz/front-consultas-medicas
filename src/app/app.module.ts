@@ -13,6 +13,7 @@ import { MenuPagsComponent } from './pages/menu/menu-pags/menu-pags.component';
 import { RecuperarPasswordComponent } from './pages/recuperar-password/recuperar-password.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { PacientesInfoComponent } from './pages/pacientes-info/pacientes-info.component';
+import { CitasComponent } from './pages/citas/citas.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PacientesInfoComponent } from './pages/pacientes-info/pacientes-info.co
     MenuPagsComponent,
     RecuperarPasswordComponent,
     PacientesComponent,
-    PacientesInfoComponent
+    PacientesInfoComponent,
+    CitasComponent
   ],
   imports: [
     BrowserModule,
