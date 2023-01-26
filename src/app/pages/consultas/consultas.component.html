@@ -1,0 +1,156 @@
+<app-menu-pags></app-menu-pags>
+<div class="main">
+    <h1 *ngIf="listado == true">Listado de Consultas</h1>
+    <table *ngIf="listado == true">
+        <thead>
+            <th></th>
+            <th>Cédula</th>
+            <th>Paciente</th>
+            <th>Observación</th>
+            <th>Médico</th>
+            <th>Especialidad</th>
+            <th>Fecha Entrada</th>
+            <th>Fecha Salida</th>
+            <th>Estado</th>
+        </thead>
+        <tbody>                
+            <tr *ngFor="let citaT of lista_citas; let i = index">
+                <td class="acciones">
+                    <svg (click)="cita=citaT; citaS = true; listado = false" cxmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check2-square" viewBox="0 0 16 16">
+                            <path
+                                d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                            <path
+                                d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                        </svg>
+                </td>
+                <td style="width: fit-content;">{{citaT.paciente.cedula}}</td>
+                <td style="width: fit-content;">{{citaT.paciente.nombres}} {{citaT.paciente.apellidos}}</td>
+                <td style="width: fit-content;">{{citaT.observacion}}</td>
+                <td style="width: fit-content;">{{citaT.medico.nombres}}</td>
+                <td style="width: fit-content;">{{citaT.medico.especialidad.descripcion}}</td>
+                <td style="width: fit-content;">{{fechaE[i]}}</td>
+                <td style="width: fit-content;">{{fechaS[i]}}</td>
+                <td style="width: fit-content;">{{citaT.estado}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button *ngIf="listado == false" id="actualziarBtn" (click)="listado = true; citaS = false">Listado de Citas</button>
+    <div class="form_consulta" *ngIf="citaS == true || editar == true">
+        <h2>Registro de Consulta</h2>
+        <div class="div-label" style="display: grid; grid-template-columns: repeat(2,1fr); align-items: end; gap: .5rem;">
+            <h2 for="cita">Identificador Cita:</h2>
+            <h4 for="value">{{cita.id}}</h4>
+        </div>
+        <div>
+            <div class="div-label">
+                <label for="consulta">Consulta</label>
+            </div>
+            <form>
+                <div class="div-label">
+                    <label for="detalle">Detalle de la consulta</label>
+                </div>
+                <input name="detalle" [(ngModel)]="consulta.detalle" type="text" placeholder="Detalle Consulta">
+                <div class="div-label">
+                    <label for="costo">Costo</label>
+                </div>
+                <input name="costo" [(ngModel)]="consulta.costo" type="number" >
+            </form>
+        </div>
+
+        <div>
+            <!-- <table id="orden-edit" *ngIf="editar == true">
+                <thead>
+                    <th>Sintomas</th>
+                    <th>Diagnóstico</th>
+                    <th>Tratamiento</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let orden of lista_ordenesMedicas; let i = index">
+                        <td style="width: fit-content;">{{orden.sintomas}}</td>
+                        <td style="width: fit-content;">{{orden.diagnostico}}</td>
+                        <td style="width: fit-content;">{{orden.tratamiento}}</td>
+                    </tr>
+                </tbody>
+            </table> -->
+
+            <div class="div-label">
+                <label for="orden">Orden Médica</label>
+            </div>
+    
+            <form>
+                <div class="div-label">
+                    <label for="sintoma">Sintomas</label>
+                </div>
+                <form style="width: 70%;">
+                    <input name="sintoma" [(ngModel)]="sintoma" type="text" placeholder="sintoma">
+                    <button (click)="sintomaAdd()">Agregar Sintoma</button>
+                    <div id="div-sintomas" class="sintomas">                    
+                    </div>
+                </form>
+                <div class="div-label">
+                    <label for="diagnostico">Diagnóstico</label>
+                </div>
+                <input name="diagnostico" [(ngModel)]="ordenes.diagnostico" type="text" placeholder="Diagnóstico">
+                <div class="div-label">
+                    <label for="tratamiento">Tratamiento</label>
+                </div>
+                <input name="tratamiento" [(ngModel)]="ordenes.tratamiento" type="text" placeholder="Tratamiento">
+                <div class="div-label">
+                    <label for="prescripcion">Agregar Prescripción</label>
+                </div>
+                <input (change)="prescripcion = (prescripcion == true)?false:true" type="checkbox" name="prescripcion">
+
+            </form>
+        </div>
+
+        <div *ngIf="prescripcion">
+            <!-- <table id="prescripciones-edit" *ngIf="editar == true">
+                <thead>
+                    <th></th>
+                    <th>Medicamento</th>
+                    <th>Instrucción</th>
+                    <th>Dias</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let prescripciones of lista_prescripciones; let i = index">
+                        <td  class="consultas acciones">
+                            <svg (click)="verOrdenes(prescripciones.id); ordenesV = true" cxmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                                <path
+                                    d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                            </svg>
+                        </td>
+                        <td style="width: fit-content;">{{prescripciones.medicamento}}</td>
+                        <td style="width: fit-content;">{{prescripciones.instruccion}}</td>
+                        <td style="width: fit-content;">{{prescripciones.dias}}</td>
+                    </tr>
+                </tbody>
+            </table> -->
+            <form>
+                <div class="div-label">
+                    <label for="medicamento">Medicamento</label>
+                </div>
+                <input name="medicamento" [(ngModel)]="preescripcion.medicamento" type="text" placeholder="Medicamento">
+                <div class="div-label">
+                    <label for="isntruccion">Instrucción</label>
+                </div>
+                <input name="isntruccion" [(ngModel)]="preescripcion.instruccion" type="text" placeholder="Instrucción">
+                <div class="div-label">
+                    <label for="dias">Dias</label>
+                </div>
+                <input name="dias" [(ngModel)]="preescripcion.dias" type="number" placeholder="Dias">
+                <button id="actualziarBtn" (click)="addPrescripcion()">Agregar Prescripción</button>
+            </form>
+        </div>
+        <div>
+            <button id="actualziarBtn" (click)="ordenAdd('add')">Agregar Orden</button>
+            <button id="eliminarBtn" (click)="ordenAdd('cancel')">Cancelar</button>
+        </div>
+
+        <button *ngIf="registrarC == true && editar == false" id="actualziarBtn" (click)="registrar()">Registrar Consulta</button>
+        <button *ngIf="registrarC == true && editar == true" id="actualziarBtn" (click)="registrar()">Actualizar Consulta</button>
+    </div>
+</div>

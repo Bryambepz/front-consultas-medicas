@@ -86,7 +86,7 @@ export class LoginRegistrarComponent implements OnInit {
                 if(this.colaborador.email == d.email &&
                   this.colaborador.contrasenia == d.contrasenia){
                     localStorage.setItem('id', d.id);
-                    localStorage.setItem('rol', d.rol);             
+                    localStorage.setItem('rol', 'Medico');
                     loginMedico = true;       
                     this.colaborador = d;          
                     this.route.navigate(['editar']);

@@ -81,7 +81,7 @@
                 <ul>
                     <li>
                         <a (click)="agendar=true; citasAccion()" >
-                            <i class="fa bi-journal-bookmark-fill fa-2x"></i>
+                            <i class="fa bi-calendar-date-fill fa-2x"></i>
                              <span class="nav-text">
                                  Agendar Cita
                              </span>
@@ -89,20 +89,29 @@
                     </li>
                     <li>
                         <a (click)="agendar=false; citasAccion()" >
-                            <i class="fa bi-journal-bookmark-fill fa-2x"></i>
+                            <i class="fa bi-journal-text fa-2x"></i>
                              <span class="nav-text">
                                  Listar
                              </span>
                          </a>
                     </li>
                 </ul>
-
-               <!-- <a href="/citas">
-                   <i class="fa bi-journal-bookmark-fill fa-2x"></i>
+            </li>
+            <li>
+               <a href="/consulta">
+                   <i class="fa bi-clipboard2-pulse-fill fa-2x"></i>
                     <span class="nav-text">
-                        Citas
+                        Consulta
                     </span>
-                </a> -->
+                </a>
+            </li>
+            <li>
+               <a href="/gestion-consultas">
+                   <i class="fa bi-clipboard-data-fill fa-2x"></i>
+                    <span class="nav-text">
+                        Gestion Consultas
+                    </span>
+                </a>
             </li>
             <li>
                <a href="/registrar-paciente">

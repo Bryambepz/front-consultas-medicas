@@ -1,0 +1,93 @@
+<app-menu-pags></app-menu-pags>
+<div class="main">
+    <h1>Consultas Realizadas y Atendidas</h1>
+
+    <table id="consultas">
+        <thead>
+            <th></th>
+            <th>Cédula</th>
+            <th>Paciente</th>
+            <th>Detalle</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let consulta of lista_consultas; let i = index">
+                <td  class="consultas acciones">
+                    <!-- {{consulta.id}} -->
+                    <svg (click)="eliminar(consulta.id)" width="16" height="16" fill="currentColor" class="bi-trash-fill"
+                        viewBox="0 0 16 16">
+                        <path
+                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                    <svg (click)="editar(consulta.id)" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="fa bi-pen-fill" viewBox="0 0 16 16">
+                        <path
+                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+                    </svg>
+                    <svg (click)="verOrdenes(consulta.id); ordenesV = true" cxmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                        <path
+                            d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                        <path
+                            d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                    </svg>
+                </td>
+                <td style="width: fit-content;">{{consulta.cita.paciente.cedula}}</td>
+                <td style="width: fit-content;">{{consulta.cita.paciente.nombres}} {{consulta.cita.paciente.apellidos}}
+                </td>
+                <td style="width: fit-content;">{{consulta.detalle}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="ordenesV == true" id="ordenes">
+        <thead>
+            <th></th>
+            <th>Diagnóstico</th>
+            <th>Tratamiento</th>
+            <th>Sintomas</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ordenes of lista_ordenes; let i = index">
+                <td class="acciones">
+                    <svg (click)="prescripcionV = true; verPrescripciones(ordenes.id)"
+                        cxmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check2-square" viewBox="0 0 16 16">
+                        <path
+                            d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                        <path
+                            d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                    </svg>
+                </td>
+                <td style="width: fit-content;">{{ordenes.diagnostico}}</td>
+                <td style="width: fit-content;">{{ordenes.tratamiento}}</td>
+                <td style="width: fit-content;">{{ordenes.sintomas}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="prescripcionV == true" id="prescripcion">
+        <thead>
+            <th></th>
+            <th>Medicamento</th>
+            <th>Instrucción</th>
+            <th>Dias</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let prescripcion of lista_prescripciones; let i = index">
+                <td class="acciones">
+                    <svg cxmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-check2-square" viewBox="0 0 16 16">
+                        <path
+                            d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                        <path
+                            d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                    </svg>
+                </td>
+                <td style="width: fit-content;">{{prescripcion.medicamento}}</td>
+                <td style="width: fit-content;">{{prescripcion.instruccion}}</td>
+                <td style="width: fit-content;">{{prescripcion.dias}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
