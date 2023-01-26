@@ -1,0 +1,108 @@
+<app-menu-pags></app-menu-pags>
+<div class="main">
+    <h1>Generar Comprobante</h1>
+    <div class="form">
+        <div class="div-label">
+            <label for="paciente">Paciente</label>
+        </div>
+        <input (keyup)="buscarPaciente()" [(ngModel)]='cedula' type="text" placeholder="Paciente" minlength="10"
+            maxlength="10">
+        <table>
+            <thead>
+                <th>Cédula</th>
+                <th>Nombres</th>
+                <th>Direccion</th>
+                <th>Celular</th>
+                <th>Email</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width: fit-content;">{{paciente.cedula}}</td>
+                    <td style="width: fit-content;">{{paciente.nombres}} {{paciente.apellidos}}</td>
+                    <td style="width: fit-content;">{{paciente.direccion}}</td>
+                    <td style="width: fit-content;">{{paciente.celular}}</td>
+                    <td style="width: fit-content;">{{paciente.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <form>
+            <div class="div-label">
+                <label for="observacion">Observación</label>
+            </div>
+            <input name="observacion" [(ngModel)]="comprobante.observacion" type="text" placeholder="Observación del comprobante">
+            <div class="div-label">
+                <label for="subtotal">Subtotal</label>
+            </div>
+            <input name="subtotal" [(ngModel)]="comprobante.subtotal" type="number" placeholder="Subtotal">
+            <div class="div-label">
+                <label for="total">total</label>
+            </div>
+            <input name="total" [(ngModel)]="comprobante.total" type="number" placeholder="Total">
+        </form>
+
+        <div>
+            <table>
+                <thead>
+                    <th></th>
+                    <th>Detalle</th>
+                    <th>Costo</th>
+                    <th>Ordenes</th>
+                </thead>
+                <tbody *ngFor="let consultaP of lista_consultas">
+                    <tr>
+                        <td class="acciones">
+                            <input style="width: 1rem;" (change)="seleccion(consultaP);" type="checkbox" name="selecciona" id="1">
+                        </td>
+                        <td style="width: fit-content;">{{consultaP.detalle}}</td>
+                        <td style="width: fit-content;">{{consultaP.costo}}</td>
+                        <!-- <td style="width: fit-content;">{{consultaP.ordenesMedicas.diagnostico}}</td> -->
+                        <table>
+                            <thead>
+                                <th>Diagnóstico</th>
+                                <th>Tratamiento</th>
+                                <th>Sintomas</th>
+                                <th>Medicamentos</th>
+                            </thead>
+                            <tbody *ngFor="let ordenes of consultaP.ordenesMedicas">
+                                <td>{{ordenes.diagnostico}}</td>
+                                <td>{{ordenes.tratamiento}}</td>
+                                <td>{{ordenes.sintomas}}</td>
+                                <!-- <td *ngFor="let presc of ordenes.preescripciones">{{presc.medicamento}}</td> -->
+                                <table style="width: max-content;">
+                                    <tbody *ngFor="let presc of ordenes.preescripciones" style="background-color: rgb(15, 144, 133);">
+                                        <td style="width: 100%;">{{presc.medicamento}}</td>        
+                                    </tbody>
+                                </table>
+                            </tbody>
+                        </table>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <h2>
+                Detalle
+            </h2>
+            <form>
+                <div class="div-label">
+                    <label for="cantidad">Cantidad</label>
+                </div>
+                <input name="cantidad" [(ngModel)]="comprobante.subtotal" type="number" placeholder="Cantidad">
+                <div class="div-label">
+                    <label for="pUnitario">Precio Unitario</label>
+                </div>
+                <input name="pUnitario" [(ngModel)]="comprobante.subtotal" type="number" placeholder="Precio Unitario">
+                <div class="div-label">
+                    <label for="total">Total</label>
+                </div>
+                <input name="total" [(ngModel)]="comprobante.subtotal" type="number" placeholder="Total">
+                <button >Agregar Detalle</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="form">
+
+    </div>
+</div>

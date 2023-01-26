@@ -16,6 +16,7 @@ import { PacientesInfoComponent } from './pages/pacientes-info/pacientes-info.co
 import { CitasComponent } from './pages/citas/citas.component';
 import { ConsultasComponent } from './pages/consultas/consultas.component';
 import { GestionConsultasComponent } from './pages/gestion-consultas/gestion-consultas.component';
+import { ComprobanteComponent } from './pages/comprobante/comprobante.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { GestionConsultasComponent } from './pages/gestion-consultas/gestion-con
     PacientesInfoComponent,
     CitasComponent,
     ConsultasComponent,
-    GestionConsultasComponent
+    GestionConsultasComponent,
+    ComprobanteComponent
   ],
   imports: [
     BrowserModule,

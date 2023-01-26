@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CitasComponent } from './pages/citas/citas.component';
+import { ComprobanteComponent } from './pages/comprobante/comprobante.component';
 import { ConsultasComponent } from './pages/consultas/consultas.component';
 import { EditarComponent } from './pages/editarInfo/editar.component';
 import { GestionConsultasComponent } from './pages/gestion-consultas/gestion-consultas.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'citas', component: CitasComponent},
   {path: 'consulta', component: ConsultasComponent},
   {path: 'gestion-consultas', component: GestionConsultasComponent},
+  {path: 'comprobantes', component: ComprobanteComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 

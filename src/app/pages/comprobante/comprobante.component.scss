@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+.main {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+h1 {
+  font-weight: bold;
+  margin: 0 0 3rem 0;
+}
+
+h2 {
+  text-align: center;
+}
+.form {
+  overflow: scroll;
+  overflow-x: hidden;
+//   height: 50rem;
+  //   margin: 2rem 0;
+}
+form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  //   justify-content: center;
+  flex-direction: column;
+  //   padding: 0 50px;
+  height: 100%;
+  text-align: center;
+  // width: 600px;
+}
+.div-label {
+  width: 36%;
+  text-align: left;
+  padding: 0.5rem 0;
+  margin: 0 auto;
+}
+label {
+  text-transform: uppercase;
+  color: #535457;
+  font-size: 0.8rem;
+}
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 33%;
+}
+
+table {
+  overflow: scroll;
+  width: 50%;
+  border-radius: 0.7rem;
+  border-collapse: inherit;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
+}
+// .acciones {
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+//   justify-content: space-evenly;
+//   gap: 1rem;
+// }
+.acciones svg {
+  cursor: pointer;
+}
+.acciones svg:hover {
+  color: white;
+}
+th,
+td {
+  //   font-family: inherit;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(0, 0, 0);
+}
+th {
+  text-align: left;
+}
+thead th {
+  background-color: #008fbb;
+  text-align: center;
+}
+tbody tr:hover {
+  background-color: rgba(55, 126, 188, 0.44);
+}
+table tbody tr:nth-child(even) {
+  background-color: #abdceb;
+}
+table tbody tr:nth-child(even):hover {
+  background-color: #055269;
+}
+table tbody tr:hover {
+  background-color: #055269;
+}
+
+button {
+	border: 1px solid #0b47b8;
+    background-color: #084ba3;
+	border-radius: 20px;
+	color: #ffffff;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+    margin-top: 1rem;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+button:focus {
+	outline: none;
+}
+
+button.ghost {
+	background-color: transparent;
+	border-color: #ffffff;
+}
