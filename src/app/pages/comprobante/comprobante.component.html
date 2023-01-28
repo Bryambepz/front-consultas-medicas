@@ -5,7 +5,7 @@
         <div class="div-label">
             <label for="paciente">Paciente</label>
         </div>
-        <input (keyup)="buscarPaciente()" [(ngModel)]='cedula' type="text" placeholder="Paciente" minlength="10"
+        <input id="pacienteCedula" (keyup)="buscarPaciente()" [(ngModel)]='cedula' type="text" placeholder="Paciente" minlength="10"
             maxlength="10">
         <table>
             <thead>
@@ -29,80 +29,143 @@
             <div class="div-label">
                 <label for="observacion">Observación</label>
             </div>
-            <input name="observacion" [(ngModel)]="comprobante.observacion" type="text" placeholder="Observación del comprobante">
+            <input name="observacion" [(ngModel)]="comprobante.observacion" type="text"
+                placeholder="Observación del comprobante">
             <div class="div-label">
                 <label for="subtotal">Subtotal</label>
             </div>
-            <input name="subtotal" [(ngModel)]="comprobante.subtotal" type="number" placeholder="Subtotal">
+            <input name="subtotal" [(ngModel)]="comprobante.subTotal" type="number" placeholder="Subtotal" readonly>
+            <!-- <div class="div-label">
+                <label for="subtotal">Estado</label>
+            </div> -->
+            <!-- <select name="estado">
+                <option value="" disabled>Indique el estado</option>
+                <option value="Generada">Generada</option>
+                <option value="Pendiente" >Pendiente</option>
+                <option value="Cancelada" >Cancelada</option>
+                <option value="Autorizada" >Autorizada</option>
+                <option value="Enviada" >Enviada</option>
+                <option value="No Autorizada" >Enviada</option>
+            </select> -->
             <div class="div-label">
                 <label for="total">total</label>
             </div>
-            <input name="total" [(ngModel)]="comprobante.total" type="number" placeholder="Total">
+            <input name="total" [(ngModel)]="comprobante.total" type="number" placeholder="Total" readonly>
         </form>
 
         <div>
-            <table>
-                <thead>
-                    <th></th>
-                    <th>Detalle</th>
-                    <th>Costo</th>
-                    <th>Ordenes</th>
-                </thead>
-                <tbody *ngFor="let consultaP of lista_consultas">
-                    <tr>
-                        <td class="acciones">
-                            <input style="width: 1rem;" (change)="seleccion(consultaP);" type="checkbox" name="selecciona" id="1">
-                        </td>
-                        <td style="width: fit-content;">{{consultaP.detalle}}</td>
-                        <td style="width: fit-content;">{{consultaP.costo}}</td>
-                        <!-- <td style="width: fit-content;">{{consultaP.ordenesMedicas.diagnostico}}</td> -->
-                        <table>
-                            <thead>
-                                <th>Diagnóstico</th>
-                                <th>Tratamiento</th>
-                                <th>Sintomas</th>
-                                <th>Medicamentos</th>
-                            </thead>
-                            <tbody *ngFor="let ordenes of consultaP.ordenesMedicas">
-                                <td>{{ordenes.diagnostico}}</td>
-                                <td>{{ordenes.tratamiento}}</td>
-                                <td>{{ordenes.sintomas}}</td>
-                                <!-- <td *ngFor="let presc of ordenes.preescripciones">{{presc.medicamento}}</td> -->
-                                <table style="width: max-content;">
-                                    <tbody *ngFor="let presc of ordenes.preescripciones" style="background-color: rgb(15, 144, 133);">
-                                        <td style="width: 100%;">{{presc.medicamento}}</td>        
-                                    </tbody>
-                                </table>
-                            </tbody>
-                        </table>                        
-                    </tr>
-                </tbody>
-            </table>
+            <div class="detalles">
+                <div>
+                    <h2>
+                        Detalle
+                    </h2>
+                    <form>
+                        <div class="div-label">
+                            <label for="cantidad">Cantidad</label>
+                        </div>
+                        <input name="cantidad" [(ngModel)]="detalleComprobante.cantidad" type="number"
+                            placeholder="Cantidad">
+                        <div class="div-label">
+                            <label for="pUnitario">Precio Unitario</label>
+                        </div>
+                        <input
+                            (keyup)="detalleComprobante.total = detalleComprobante.cantidad * detalleComprobante.precioUnitario"
+                            name="pUnitario" [(ngModel)]="detalleComprobante.precioUnitario" type="number"
+                            placeholder="Precio Unitario">
+                        <div class="div-label">
+                            <label for="total">Total</label>
+                        </div>
+                        <input name="total" [(ngModel)]="detalleComprobante.total" type="number" placeholder="Total"
+                            readonly>
+                    </form>
+                </div>
+                <div style="border-left: 1px solid gray; height: 100%;">
+                    <table style="width: 90%;">
+                        <thead>
+                            <!-- <th></th> -->
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let detalle of lista_detalles">
+                                <!-- <td *ngIf="editarDetalle == true">
+                                    <svg width="16" height="16" fill="currentColor"
+                                        class="bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                        height="16" fill="currentColor" class="fa bi-pen-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
+                                    </svg>
+                                </td> -->
+                                <!-- <td *ngIf="!editarDetalle" style="width: fit-content;">{{detalle.cantidad}}</td> -->
+                                <td (change)=" detalle.total = detalle.cantidad * detalle.precioUnitario" style="width: fit-content;">
+                                    <input type="number" [(ngModel)] = "detalle.cantidad">
+                                </td>
+                                <!-- <td *ngIf="!editarDetalle" style="width: fit-content;">{{detalle.precioUnitario}}</td> -->
+                                <td (change)=" detalle.total = detalle.cantidad * detalle.precioUnitario" style="width: fit-content;">
+                                    <input type="number" [(ngModel)] ="detalle.precioUnitario">
+                                </td>
+                                <td style="width: fit-content;">{{detalle.total}}</td>
+                                <!-- <td *ngIf="editarDetalle" style="width: fit-content;">
+                                    <input type="number" [(ngModel)] = "detalle.total">
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div *ngIf="seleccionComp == false && consultaDetalle">
+                <table>
+                    <thead>
+                        <th></th>
+                        <th>Detalle</th>
+                        <th>Costo</th>
+                        <th>Ordenes</th>
+                    </thead>
+                    <tbody *ngFor="let consultaP of lista_consultas">
+                        <tr>
+                            <td class="acciones">
+                                <input style="width: 1rem;" (change)="seleccion(consultaP);" type="checkbox"
+                                    name="selecciona" id="1">
+                            </td>
+                            <td style="width: fit-content;">{{consultaP.detalle}}</td>
+                            <td style="width: fit-content;">{{consultaP.costo}}</td>
+                            <!-- <td style="width: fit-content;">{{consultaP.ordenesMedicas.diagnostico}}</td> -->
+                            <table>
+                                <thead>
+                                    <th>Diagnóstico</th>
+                                    <th>Tratamiento</th>
+                                    <th>Sintomas</th>
+                                    <th>Medicamentos</th>
+                                </thead>
+                                <tbody *ngFor="let ordenes of consultaP.ordenesMedicas">
+                                    <td>{{ordenes.diagnostico}}</td>
+                                    <td>{{ordenes.tratamiento}}</td>
+                                    <td>{{ordenes.sintomas}}</td>
+                                    <!-- <td *ngFor="let presc of ordenes.preescripciones">{{presc.medicamento}}</td> -->
+                                    <table style="width: max-content;">
+                                        <tbody *ngFor="let presc of ordenes.preescripciones"
+                                            style="background-color: rgb(15, 144, 133);">
+                                            <td style="width: 100%;">{{presc.medicamento}}</td>
+                                        </tbody>
+                                    </table>
+                                </tbody>
+                            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button *ngIf="consultaDetalle" (click)="addDetalle()">Agregar Detalle</button>
         </div>
-
-        <div>
-            <h2>
-                Detalle
-            </h2>
-            <form>
-                <div class="div-label">
-                    <label for="cantidad">Cantidad</label>
-                </div>
-                <input name="cantidad" [(ngModel)]="comprobante.subtotal" type="number" placeholder="Cantidad">
-                <div class="div-label">
-                    <label for="pUnitario">Precio Unitario</label>
-                </div>
-                <input name="pUnitario" [(ngModel)]="comprobante.subtotal" type="number" placeholder="Precio Unitario">
-                <div class="div-label">
-                    <label for="total">Total</label>
-                </div>
-                <input name="total" [(ngModel)]="comprobante.subtotal" type="number" placeholder="Total">
-                <button >Agregar Detalle</button>
-            </form>
+        <div class="div-button">
+            <button (click)="generar()">Generar Comprobante</button>
+            <!-- <button *ngIf="editarDetalle" (click)="editarC()">Editar Comprobante</button> -->
+            <button style="background-color: #bf2a0c; border: 1px solid #bf2a0c" (click)="cancelar()">Cancelar</button>
         </div>
     </div>
 
-    <div class="form">
-
-    </div>
 </div>

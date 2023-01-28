@@ -4,6 +4,7 @@ import { CitasComponent } from './pages/citas/citas.component';
 import { ComprobanteComponent } from './pages/comprobante/comprobante.component';
 import { ConsultasComponent } from './pages/consultas/consultas.component';
 import { EditarComponent } from './pages/editarInfo/editar.component';
+import { GestionComprobantesComponent } from './pages/gestion-comprobantes/gestion-comprobantes.component';
 import { GestionConsultasComponent } from './pages/gestion-consultas/gestion-consultas.component';
 import { LoginRegistrarComponent } from './pages/login-registrar/login-registrar.component';
 import { PacientesInfoComponent } from './pages/pacientes-info/pacientes-info.component';
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'citas', component: CitasComponent},
   {path: 'consulta', component: ConsultasComponent},
   {path: 'gestion-consultas', component: GestionConsultasComponent},
-  {path: 'comprobantes', component: ComprobanteComponent},
+  {path: 'gestion-comprobantes', component: ComprobanteComponent},
+  {path: 'comprobantes', component: GestionComprobantesComponent},
   {path: '', redirectTo: 'login', pathMatch: 'full'}
 ];
 

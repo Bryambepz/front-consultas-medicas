@@ -6,7 +6,7 @@ export class Comprobantes{
     fecha: Date = new Date();
     observacion:string='';
     iva:number=0.0;
-    subtotal:number=0;
+    subTotal:number=0;
     total:number=0;
     estado:string = 'Generada'
     detalles:any;

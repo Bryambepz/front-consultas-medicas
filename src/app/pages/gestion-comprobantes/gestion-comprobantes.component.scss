@@ -23,9 +23,9 @@ form {
   background-color: #ffffff;
   display: flex;
   align-items: center;
-  //   justify-content: center;
+  justify-content: center;
   flex-direction: column;
-  //   padding: 0 50px;
+  padding: 0 50px;
   height: 100%;
   text-align: center;
   // width: 600px;
@@ -51,19 +51,19 @@ input {
 
 table {
   overflow: scroll;
-  width: 50%;
+  width: 65%;
   border-radius: 0.7rem;
   border-collapse: inherit;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   margin: 1rem auto;
 }
-// .acciones {
-//   display: grid;
-//   grid-template-columns: repeat(2, 1fr);
-//   justify-content: space-evenly;
-//   gap: 1rem;
-// }
+.acciones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-evenly;
+  gap: 1rem;
+}
 .acciones svg {
   cursor: pointer;
 }
@@ -109,50 +109,4 @@ button {
   text-transform: uppercase;
   transition: transform 80ms ease-in;
   margin: 1rem 0;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-button:focus {
-  outline: none;
-}
-
-button.ghost {
-  background-color: transparent;
-  border-color: #ffffff;
-}
-
-.detalles {
-  margin: 2rem auto 1rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: center;
-  align-items: baseline;
-  border: 1px solid gray;
-  gap: 1rem;
-  width: 90%;
-  border-radius: 1rem;
-}
-
-.div-button{
-  margin: 0 auto;
-  width: 30%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-
-select{
-	background-color: #eee;
-  border: 0;
-  display: block;
-  text-align: center;
-  font-size: 14px;
-//   font-family: inherit;
-  width: 30%;
-  height: 2rem;
-  padding: 0 2rem;
-  margin: 0 auto
 }

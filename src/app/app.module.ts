@@ -17,6 +17,7 @@ import { CitasComponent } from './pages/citas/citas.component';
 import { ConsultasComponent } from './pages/consultas/consultas.component';
 import { GestionConsultasComponent } from './pages/gestion-consultas/gestion-consultas.component';
 import { ComprobanteComponent } from './pages/comprobante/comprobante.component';
+import { GestionComprobantesComponent } from './pages/gestion-comprobantes/gestion-comprobantes.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ComprobanteComponent } from './pages/comprobante/comprobante.component'
     CitasComponent,
     ConsultasComponent,
     GestionConsultasComponent,
-    ComprobanteComponent
+    ComprobanteComponent,
+    GestionComprobantesComponent
   ],
   imports: [
     BrowserModule,

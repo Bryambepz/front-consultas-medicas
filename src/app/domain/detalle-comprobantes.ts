@@ -6,5 +6,5 @@ export class Detalle_Comprobantes{
     cantidad:number=0;
     precioUnitario:number=0;
     total:number=0;
-    consulta: Consultas = new Consultas();
+    consulta: any;
 }
