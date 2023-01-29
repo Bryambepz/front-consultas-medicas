@@ -10,11 +10,16 @@ export class ServTransaccionService {
 
   constructor(private http: HttpClient) {}
 
-  registrar(transaccion: Transacciones) {
+  registrar(transaccion: Transacciones, tipo:string) {
     const headers = { 'content-type': 'application/json' };
     let body = JSON.stringify(transaccion);
     body = '{'+body.substring(body.search('asunto')-1,body.length);
-    body = body.substring(0, body.search(',"numero"')) + body.substring(body.search(',"observacion'), body.length) 
+    if(tipo == 'ingreso'){
+      body = body.substring(0, body.search(',"numero"')) + body.substring(body.search(',"observacion'), body.length) 
+    }else{
+      body = body.substring(0, body.search(',"comprobante')) + '}';
+    }
+
     // for (let i = 0; i < body.length; i++) {
     //   let id = body.substring(i,i+8);     
     //   if(id == '"id":"",'){

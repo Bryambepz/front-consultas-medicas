@@ -15,6 +15,8 @@ export class GestionComprobantesComponent implements OnInit{
 
   comprobante:Comprobantes = new Comprobantes();
   addTrasac:boolean = false;
+  opcion:string = 'Todos';
+  transacCom: boolean = false;
   
   constructor(
     private servComprobantes: ServComprobanteService,
@@ -22,9 +24,17 @@ export class GestionComprobantesComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-     this.servComprobantes.getComprobantes().subscribe((d) => d.body!.forEach((f) => (f.estado != 'Anulado')? this.lista_comprobantes.push(f): this.lista_comprobantes))
+     this.servComprobantes.getComprobantes().subscribe((d) => d.body!.forEach((f) => this.lista_comprobantes.push(f)))
   }
 
+  listarSegun(){
+    this.lista_comprobantes = [];
+    this.servComprobantes.getComprobantes().subscribe((d) => this.lista_comprobantes = d.body!.filter((f) => 
+    (this.opcion == 'Todos')? 
+    this.lista_comprobantes.push(f): 
+    (this.opcion == 'Anulados')? f.estado == 'Anulado': (this.opcion == 'Generados')? f.estado == 'Generada': f.estado == 'Pagada'
+    ))
+  }
   eliminarComprobante(idComp:string){
     this.servComprobantes.getComprobanteId(idComp).subscribe((d) =>{
       let comprobante: Comprobantes = new Comprobantes();
@@ -43,26 +53,29 @@ export class GestionComprobantesComponent implements OnInit{
   }
 
   transaccionCreate(){
-    // this.servComprobantes.getComprobanteId(this.comprobante.id).subscribe((d) => {
-    //   console.log(d.body!.at(0));
-    //   this.servTransaccion.registrar(this.transaccion)
-    // })
-    this.comprobante.estado = 'Pagada';
-    this.comprobante.detalles = [];
-    this.transaccion.comprobante = this.comprobante;
-    console.log(this.transaccion);
-    this.servTransaccion.registrar(this.transaccion).subscribe((d) => {
-      if(d.status == 200 && d.statusText == 'OK'){
-        window.alert('Se ha realizado la transferencia con exito');
-        console.log(this.comprobante);
-        
-        // this.servComprobantes.actualizar(this.comprobante, this.comprobante.id).subscribe((d) => {
-        //   if(d.status == 200 && d.statusText == 'OK'){
-        //     window.alert('Se ha realizado la transferencia con exito');
-        //   }
-        // })
-      }
-    })
+    if(this.transaccion.tipo == 'Ingreso'){    
+      this.comprobante.estado = 'Pagada';
+      this.comprobante.detalles = [];
+      this.transaccion.comprobante = this.comprobante;
+      console.log(this.transaccion);
+      this.servTransaccion.registrar(this.transaccion, 'ingreso')
+      .subscribe((d) => {
+        if(d.status == 200 && d.statusText == 'OK'){
+          window.alert('Se ha realizado la transferencia con exito');
+          console.log(this.comprobante);      
+          this.servComprobantes.actualizar(this.comprobante, this.comprobante.id)
+        }
+      })
+    }else{
+      
+      this.servTransaccion.registrar(this.transaccion, 'egreso')
+      .subscribe((d) => {
+        if(d.status == 200 && d.statusText == 'OK'){
+          window.alert('Se ha realizado la transferencia con exito');
+          console.log(this.comprobante);      
+        }
+      })
+    }
   }
 
 }

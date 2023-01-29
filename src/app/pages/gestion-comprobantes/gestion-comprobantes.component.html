@@ -1,6 +1,15 @@
 <app-menu-pags></app-menu-pags>
 <div class="main">
     <h1>Historial de Comprobantes</h1>
+    <div>
+        <h3>Ver Comprobantes</h3>
+        <select (click)="listarSegun()" [(ngModel)] = "opcion">
+            <option value="Todos">Todos</option>
+            <option value="Generados">Generados</option>
+            <option value="Anulados">Anulados</option>
+            <option value="Pagados">Pagados</option>
+        </select>
+    </div>
     <div class="form">
         <table>
             <thead>
@@ -27,7 +36,7 @@
                             <path
                                 d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z" />
                         </svg> -->
-                        <svg (click)="comprobante = comprobantes; addTrasac = true" cxmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        <svg (click)="comprobante = comprobantes; addTrasac = true; transaccion.tipo = 'Ingreso'; transacCom = true" cxmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-check2-square" viewBox="0 0 16 16">
                         <path
                             d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
@@ -63,11 +72,16 @@
         </table>
     </div>
 
+    <div>
+        <button (click)="transaccion.tipo = 'Egreso'; 
+        addTrasac = true;
+        transacCom = false">Realizar transacción Aparte</button>
+    </div>
     <div *ngIf="addTrasac">
         <h1>Transacciones</h1>
         <form>
 
-            <div class="div-label" style="text-align: center;">
+            <div *ngIf="transacCom" class="div-label" style="text-align: center;">
                 <h2 for="asunto">Identificador de comprobante</h2>
                 <h4>{{comprobante.id}}</h4>
             </div>
@@ -78,7 +92,7 @@
             <div class="div-label">
                 <label for="tipo">Tipo</label>
             </div>
-            <input name="tipo" [(ngModel)]="transaccion.tipo" type="text" placeholder="Tipo">
+            <input name="tipo" [(ngModel)]="transaccion.tipo" type="text" placeholder="Tipo" readonly>
             <div class="div-label">
                 <label for="monto">Monto</label>
             </div>
