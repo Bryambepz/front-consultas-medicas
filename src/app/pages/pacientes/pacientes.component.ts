@@ -13,6 +13,9 @@ export class PacientesComponent implements OnInit{
   constructor(private servPaciente:ServPacienteService){}
 
   ngOnInit(): void {
+    if (localStorage.getItem('id') == '' || localStorage.getItem('rol') == '') {
+      window.location.href = '/login';
+    }
   }
 
   pacienteRegs(){

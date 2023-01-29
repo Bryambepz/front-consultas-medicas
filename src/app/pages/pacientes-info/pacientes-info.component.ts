@@ -16,6 +16,10 @@ export class PacientesInfoComponent implements OnInit {
   constructor(private servPacientes:ServPacienteService, private router:Router) {}
 
   ngOnInit(): void {
+    if (localStorage.getItem('id') == '' || localStorage.getItem('rol') == '') {
+      window.location.href = '/login';
+    }
+    
     this.servPacientes.getPacientes().subscribe((d) => {
       this.lista_colaboradores = d.body!;           
     })

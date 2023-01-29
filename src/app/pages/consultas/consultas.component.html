@@ -1,6 +1,6 @@
 <app-menu-pags></app-menu-pags>
 <div class="main">
-    <h1 *ngIf="listado == true">Listado de Consultas</h1>
+    <h1 *ngIf="listado == true">Listado de Citas</h1>
     <table *ngIf="listado == true">
         <thead>
             <th></th>
@@ -16,6 +16,7 @@
         <tbody>                
             <tr *ngFor="let citaT of lista_citas; let i = index">
                 <td class="acciones">
+                    {{citaT.id}}
                     <svg (click)="cita=citaT; citaS = true; listado = false" cxmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-check2-square" viewBox="0 0 16 16">
                             <path

@@ -36,6 +36,11 @@ export class CitasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    if (localStorage.getItem('id') == '' || localStorage.getItem('rol') == '') {
+      window.location.href = '/login';
+    }
+
     let accionCita;
     this.route.queryParams.subscribe((params) => {
       accionCita = params['cita']; // { order: "popular" }

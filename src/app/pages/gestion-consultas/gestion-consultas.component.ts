@@ -21,6 +21,10 @@ export class GestionConsultasComponent implements OnInit {
   constructor(private servConsultas: ServConsultasService) {}
 
   ngOnInit(): void {
+    if (localStorage.getItem('id') == '' || localStorage.getItem('rol') == '') {
+      window.location.href = '/login';
+    }
+    
     this.servConsultas.getConsultas().subscribe((d) => {
       d.body!.forEach((f) => {
         if (f.cita.medico.id == localStorage.getItem('id')!.toString()) {

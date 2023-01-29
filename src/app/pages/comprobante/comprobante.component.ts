@@ -38,20 +38,9 @@ export class ComprobanteComponent implements OnInit {
   // accion: string = '';
 
   ngOnInit(): void {
-    // this.route.queryParams.subscribe((params) => {
-    //   this.accion = params['editar']; // { order: "popular" }
-    // });
-    // if(this.accion != undefined){
-    //   this.servComprobante.getComprobanteId(this.accion).subscribe((d) => {
-    //     this.paciente = d.body!.at(0)?.paciente!;
-    //     this.cedula = this.paciente.cedula;
-    //     this.comprobante = d.body!.at(0)!;
-    //     this.lista_detalles = d.body!.at(0)?.detalles
-    //     this.editarDetalle = true;
-    //     document.getElementById('pacienteCedula')!.setAttribute("readonly", "readonly")
-    //     document.getElementById('pacienteCedula')!.style.backgroundColor = '#b7b7b7'
-    //   })
-    // }
+    if (localStorage.getItem('id') == '' || localStorage.getItem('rol') == '') {
+      window.location.href = '/login';
+    }
   }
 
   buscarPaciente() {

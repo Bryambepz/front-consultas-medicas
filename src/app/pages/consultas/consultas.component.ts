@@ -40,6 +40,10 @@ export class ConsultasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (localStorage.getItem('id') == '' || localStorage.getItem('rol') == '') {
+      window.location.href = '/login';
+    }
+
     let edit;
     this.route.queryParams.subscribe((params) => {
       edit = params['editar']; // { order: "popular" }
@@ -170,12 +174,15 @@ export class ConsultasComponent implements OnInit {
         this.consulta.ordenesMedicas = this.lista_ordenesMedicas;
         this.ordenes.preescripciones = this.lista_prescripciones;
 
-        this.servConsultas.crear(this.consulta).subscribe((d) => {
+        this.servConsultas.crear(this.consulta)
+        .subscribe((d) => {
           // console.log(d);
           // this.listado = true;
-          window.location.reload();
-
-          window.alert('Se ha registrado la consulta');
+          this.servCitas.actualizar(this.cita).subscribe((d) => {
+            window.location.reload();
+  
+            window.alert('Se ha registrado la consulta');
+          })
         });
       } else {
         window.alert('NOp');

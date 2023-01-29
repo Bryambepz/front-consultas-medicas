@@ -24,6 +24,9 @@ export class GestionComprobantesComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    if (localStorage.getItem('id') == '' || localStorage.getItem('rol') == '') {
+      window.location.href = '/login';
+    }
      this.servComprobantes.getComprobantes().subscribe((d) => d.body!.forEach((f) => this.lista_comprobantes.push(f)))
   }
 
